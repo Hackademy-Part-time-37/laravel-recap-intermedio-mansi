@@ -8,9 +8,19 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a href="{{ route('homepage') }}" class="nav-link">Homepage</a>
-                <a class="nav-link" href="#">Login</a>
-                <a class="nav-link" href="#">Registrati</a>
-                <a class="nav-link" href="#">Logout</a>
+                @guest
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link" href="{{ route('register') }}">Registrati</a>
+                @endguest
+
+                @auth
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="nav-link">Logout</button>
+                    </form>
+                @endauth
+
+
             </div>
         </div>
     </div>
